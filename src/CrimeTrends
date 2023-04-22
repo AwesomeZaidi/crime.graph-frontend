@@ -1,0 +1,84 @@
+// import React, { useState, useEffect } from 'react';
+// import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
+// import tw from 'twin.macro';
+
+// type CrimeData = {
+//   year: number;
+//   crimes: number;
+// };
+
+// type Props = {};
+
+// type Filters = {
+//   ethnicity: 'All' | 'White' | 'Black' | 'Hispanic' | 'Asian' | 'Other';
+//   area: string;
+//   crimeType: 'HOMICIDE' | 'THEFT' | 'BATTERY';
+// };
+
+// const CrimeTrends = (props: Props) => {
+//   const [data, setData] = useState<CrimeData[]>([]);
+//   const [filters, setFilters] = useState<Filters>({
+//     ethnicity: 'All',
+//     area: '',
+//     crimeType: 'HOMICIDE',
+//   });
+//   const [applyEnabled, setApplyEnabled] = useState(false);
+//   const [areas, setAreas] = useState<string[]>([]);
+
+//   useEffect(() => {
+//     fetchData();
+//   }, []);
+
+//   const fetchData = async () => {
+//     const query = Object.entries(filters)
+//       .map(([key, value]) => (value ? `${key}=${encodeURIComponent(value)}` : ''))
+//       .filter((param) => param)
+//       .join('&');
+//     const response = await fetch(`http://localhost:5002/crime-trend${query ? '?' + query : ''}`);
+//     const crimeData = await response.json();
+//     setData(crimeData.sort((a, b) => a.year - b.year));
+//   };
+
+//   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+//     setFilters({ ...filters, [event.target.name]: event.target.value as Filters[keyof Filters] });
+//     setApplyEnabled(true);
+//   };
+
+//   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+//     event.preventDefault();
+//     fetchData();
+//     setApplyEnabled(false);
+//   };
+
+//   const generateTitle = () => {
+//     const defaultYearRange = `${new Date().getFullYear() - 12} - ${new Date().getFullYear()}`;
+//     const yearRange = data.length ? `${data[0].year} - ${data[data.length - 1].year}` : defaultYearRange;
+
+//     // Initialize the default filter values
+//     const defaultFilters: Filters = {
+//       ethnicity: 'All',
+//       area: '',
+//       crimeType: 'HOMICIDE',
+//     };
+
+//     const filterDescriptions = Object.entries(filters)
+//       .map(([key, value]) => `${key}: ${value || defaultFilters[key]}`)
+//       .join(', ');
+
+//     return `Crime data for ${yearRange} | Filters: ${filterDescriptions}`;
+//   };
+
+//   return (
+//     <div css={tw`h-screen w-screen flex flex-col items-center justify-center bg-gray-100`}>
+//       <h1 css={tw`text-3xl font-bold mb-8`}>Crime Trends in Chicago</h1>
+//       <form onSubmit={handleSubmit} css={tw`mb-8`}>
+//         <div css={tw`flex items-center space-x-4 mb-4`}>
+//           <label css={tw`w-1/4`} htmlFor="ethnicity">
+//             Ethnicity:
+//             <select
+//               css={tw`w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 mt-1 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+//               name="ethnicity"
+//               id="ethnicity"
+//               value={filters.ethnicity}
+//               onChange={handleChange}
+//             >
