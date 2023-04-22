@@ -4,13 +4,14 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-
+import { Analytics } from "@vercel/analytics/react";
 const rootElement = document.getElementById("root");
 
 if (rootElement) {
   ReactDOM.render(
     <React.StrictMode>
       <App />
+      <Analytics />
     </React.StrictMode>,
     rootElement
   );
