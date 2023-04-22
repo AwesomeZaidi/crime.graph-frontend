@@ -216,7 +216,6 @@ const App = () => {
                   <MenuItem value="Robbery">Robbery</MenuItem>
                   <MenuItem value="Battery">Battery</MenuItem>
                   <MenuItem value="Arson">Arson</MenuItem>
-                  <MenuItem value="Theft">Theft</MenuItem>
                 </Select>
               </FormControl>
               {/* Years to Display */}
