@@ -114,7 +114,7 @@ const App = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        "https://crime-graph-backend.vercel.app//crime-trend",
+        "https://crime-graph-backend.vercel.app/crime-trend",
         {
           params: {
             crimeType,
