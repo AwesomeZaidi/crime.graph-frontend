@@ -51,7 +51,7 @@ html {
         display: flex;
         flex-direction: column;
         width: auto;
-        padding: 12px;
+        padding: 12px 12px 42px 12px;
     }
     .filter-container {
         margin-bottom: 2em;
