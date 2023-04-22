@@ -113,13 +113,16 @@ const App = () => {
   const fetchCrimeData = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("http://localhost:5002/crime-trend", {
-        params: {
-          crimeType,
-          yearsToDisplay: yearsToDisplay + 1,
-          locationArea,
-        },
-      });
+      const response = await axios.get(
+        "https://crime-graph-backend.vercel.app//crime-trend",
+        {
+          params: {
+            crimeType,
+            yearsToDisplay: yearsToDisplay + 1,
+            locationArea,
+          },
+        }
+      );
       const sortedData = response.data.sort(
         (a: any, b: any) => a.year - b.year
       );
